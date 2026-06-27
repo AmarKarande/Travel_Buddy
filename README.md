@@ -3,17 +3,13 @@
 TravelGenius is a React-based travel planning application designed to help users explore nearby attractions, restaurants, and hotels using real-time location data and weather forecasts. This project integrates Material UI for modern styling and leverages the Google Maps API for interactive map functionality and location-based recommendations. Additionally, the app features AI-powered recommendations to enhance user experience by providing personalized travel plans.
 
 ### Live Link
-Visit the site at [TravelGenius](https://travelgenius.vercel.app/)
+Visit the site at [TravelBuddy]
 
 ### Snapshots
 #### Landing Page
-![Landing page](https://github.com/BhaskarAcharjee/TravelGenius/assets/76872572/97066c9e-7bd3-42fc-a8ed-3805cd00b5cb)
+
 #### App Interface
-![Map & Weather Interface](https://github.com/BhaskarAcharjee/TravelGenius/assets/76872572/7f4d30e2-583e-4b29-ad40-66cb5202ec67)
-![Trip Planner](https://github.com/BhaskarAcharjee/TravelGenius/assets/76872572/cc0bf09e-8722-44a8-9a02-4eec11380cf2)
-#### AI-Powered Recommendations
-![AI Trip Plan](https://github.com/BhaskarAcharjee/TravelGenius/assets/76872572/024527e1-0c35-447a-b127-565a3f30b7a2)
-![Detailed AI Plan](https://github.com/BhaskarAcharjee/TravelGenius/assets/76872572/9496a59c-a741-4c53-8b45-e20bed6960b9)
+
 
 ### Features
 - **Nearby Places Recommendations:** Get recommendations for attractions, restaurants, and hotels near your location.
@@ -67,7 +63,6 @@ To run this project locally, follow these steps:
 - Enhanced filtering options for hotels and restaurants.
 
 ### License
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ### Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
