@@ -1,4 +1,4 @@
-## TravelGenius
+## TravelBuddy
 
 TravelGenius is a React-based travel planning application designed to help users explore nearby attractions, restaurants, and hotels using real-time location data and weather forecasts. This project integrates Material UI for modern styling and leverages the Google Maps API for interactive map functionality and location-based recommendations. Additionally, the app features AI-powered recommendations to enhance user experience by providing personalized travel plans.
 
