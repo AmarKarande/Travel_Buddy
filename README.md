@@ -1,68 +1,243 @@
-## TravelBuddy
+# 🌍 TravelBuddy
 
-TravelGenius is a React-based travel planning application designed to help users explore nearby attractions, restaurants, and hotels using real-time location data and weather forecasts. This project integrates Material UI for modern styling and leverages the Google Maps API for interactive map functionality and location-based recommendations. Additionally, the app features AI-powered recommendations to enhance user experience by providing personalized travel plans.
+<p align="center">
+  <strong>AI-Powered Travel Planning & Location Discovery Platform</strong>
+</p>
 
-### Live Link
-Visit the site at [TravelBuddy]
+<p align="center">
+  Discover nearby restaurants, hotels, and attractions with real-time weather insights, interactive maps, and personalized AI travel recommendations.
+</p>
 
-### Snapshots
-#### Landing Page
+---
 
-#### App Interface
+## 📖 Overview
+
+**TravelBuddy** is a modern travel planning web application built with **React** that helps travelers explore destinations effortlessly. The application combines location-based services, interactive maps, weather forecasting, and artificial intelligence to provide personalized travel recommendations.
+
+Whether you're planning a weekend getaway or exploring a new city, TravelBuddy helps you discover the best places around you and generate customized travel plans based on your interests, budget, and trip duration.
+
+---
+
+## 🚀 Live Demo
+
+🔗 **Website:** https://your-live-link.com
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Landing Page
+
+> Add your landing page screenshot.
+
+```md
+![Landing Page](./screenshots/landing-page.png)
+```
+
+---
+
+### 🗺️ Application Interface
+
+> Add your application screenshot.
+
+```md
+![Application Interface](./screenshots/app-interface.png)
+```
+
+---
+
+# ✨ Features
+
+## 🍽️ Restaurants
+
+Discover top-rated restaurants, hidden culinary gems, and authentic local dining experiences tailored to your taste and current location.
+
+---
+
+## 🏨 Hotels
+
+Find the perfect accommodation—from luxury resorts and boutique hotels to affordable stays—for every travel style and budget.
+
+---
+
+## 📍 Attractions
+
+Explore famous landmarks, cultural sites, natural wonders, and hidden destinations recommended based on your location.
+
+---
+
+## 🤖 AI Recommendations
+
+Generate personalized travel itineraries powered by AI using your destination, travel preferences, budget, mood, and trip duration.
+
+---
+
+## 🗺️ Interactive Maps
+
+Navigate with Google Maps integration featuring:
+
+* Nearby Places
+* Live Location
+* Interactive Markers
+* Smooth Navigation
+* Dynamic Map Updates
+
+---
+
+## 🌤️ Real-Time Weather
+
+Access live weather information including:
+
+* Current Temperature
+* Weather Conditions
+* Forecast Information
+* Location-based Weather Updates
+
+---
+
+## 🎯 Smart Filters
+
+Customize search results using filters such as:
+
+* Ratings
+* Price Range
+* Place Type
+* Categories
+* User Preferences
+
+---
+
+## 📱 Responsive Design
+
+Built with Material UI to deliver a seamless experience across desktops, tablets, and mobile devices.
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React.js
+* JavaScript (ES6+)
+* Material UI 5
+* CSS3
+* Axios
+
+---
+
+## APIs
+
+| API                | Purpose                           |
+| ------------------ | --------------------------------- |
+| Google Maps API    | Interactive Maps & Places         |
+| Travel Advisor API | Restaurants, Hotels & Attractions |
+| OpenWeatherMap API | Real-time Weather Forecast        |
+| Google Gemini API  | AI-powered Travel Recommendations |
+
+---
 
 
-### Features
-- **Nearby Places Recommendations:** Get recommendations for attractions, restaurants, and hotels near your location.
-- **Real-time Weather Forecast:** Provides current weather conditions to help plan your trip.
-- **Interactive Map Integration:** Uses Google Maps API for seamless navigation and location-based suggestions.
-- **AI-Powered Travel Plans:** Generate personalized travel plans based on user input (destination, budget, mood, and duration).
-- **Modern UI/UX:** Built with Material UI 5 for a sleek and responsive user experience.
-- **Multi-criteria Filters:** Customize search results based on preferences like budget, travel mood, and interests.
+# ⚙️ Installation
 
-### Technologies Used
-- **Frontend:** React, JavaScript, Material UI
-- **APIs:**
-  - Google Maps API (Location Search, Places, and Navigation)
-  - Travel Advisor API (Tourist Attractions, Hotels, Restaurants)
-  - OpenWeatherMap API (Real-time Weather Updates)
-  - Google Generative AI API (Smart AI Recommendations)
+## Clone the Repository
 
-### Getting Started
-To run this project locally, follow these steps:
+```bash
+git clone https://github.com/your-username/TravelBuddy.git
+```
 
-1. Clone this repository.
-   ```bash
-   git clone https://github.com/BhaskarAcharjee/TravelGenius.git
-   ```
-2. Navigate into the project directory.
-   ```bash
-   cd TravelGenius
-   ```
-3. Install dependencies.
-   ```bash
-   npm install
-   ```
-4. Create a `.env` file in the root directory and add the required API keys:
-   ```plaintext
-   REACT_APP_ENV=development (optional)
-   REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-   REACT_APP_TRAVEL_ADVISOR_API_KEY=your_travel_advisor_api_key
-   REACT_APP_OPENWEATHERMAP_API_KEY=your_openweather_api_key
-   REACT_APP_GEMINI_API_KEY=your_google_generative_ai_key
-   ```
-5. Start the development server.
-   ```bash
-   npm start
-   ```
-6. Open your browser and go to `http://localhost:3000` to view the application.
+Move into the project directory.
 
-### Future Improvements
-- Add user authentication and personalized trip history.
-- Improve AI recommendations with more detailed itineraries.
-- Offline support for saved travel plans.
-- Enhanced filtering options for hotels and restaurants.
+```bash
+cd TravelBuddy
+```
 
-### License
+Install dependencies.
 
-### Contributing
-Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+```bash
+npm install
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file in the project root and add the following variables:
+
+```env
+REACT_APP_ENV=development
+
+REACT_APP_GOOGLE_MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY
+
+REACT_APP_TRAVEL_ADVISOR_API_KEY=YOUR_TRAVEL_ADVISOR_API_KEY
+
+REACT_APP_OPENWEATHERMAP_API_KEY=YOUR_OPENWEATHERMAP_API_KEY
+
+REACT_APP_GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+```
+
+---
+
+# ▶️ Running the Application
+
+Start the development server.
+
+```bash
+npm start
+```
+
+The application will be available at:
+
+```text
+http://localhost:3000
+```
+
+---
+
+# 💡 How It Works
+
+1. Detects the user's current location.
+2. Retrieves nearby restaurants, hotels, and attractions.
+3. Displays places on an interactive Google Map.
+4. Fetches real-time weather information.
+5. Uses AI to generate personalized travel recommendations.
+6. Allows users to refine results using intelligent filters.
+
+---
+
+# 🔮 Future Enhancements
+
+* 🔐 User Authentication
+* ❤️ Favorite Places
+* 📅 Saved Trips
+* 🧳 AI Multi-Day Itinerary Planning
+* 🌍 Multi-language Support
+* 📥 Offline Mode
+* 💳 Budget Estimator
+* 📸 Attraction Gallery
+* 🚗 Route Optimization
+* ⭐ Reviews & Ratings
+* 📍 Share Trip Plans
+
+---
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# 👨‍💻 Author
+
+**AK**
+
+GitHub: https://github.com/your-username
+
+LinkedIn: https://linkedin.com/in/your-profile
+
+---
+
+<p align="center">
+⭐ If you found this project useful, consider giving it a star on GitHub!
+</p>

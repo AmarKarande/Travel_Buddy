@@ -12,32 +12,36 @@ import {
 } from "@mui/material";
 
 import {
-  LocationOnOutlined,
+  LocationOn,
   Star,
   MyLocation,
 } from "@mui/icons-material";
 
-import { styled, keyframes } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 import mapStyles from "./mapStyles";
 
 /* ==============================
-   Animations
+   Design tokens
+   Keep all color/shadow decisions
+   here so the look stays consistent
+   and easy to tune in one place.
 ============================== */
 
-const float = keyframes`
-0%{
-transform:translateY(0px);
-}
+const colors = {
+  primary: "#2563EB",
+  primaryDark: "#1D4ED8",
+  text: "#0F172A",
+  textMuted: "#64748B",
+  border: "#E2E8F0",
+  surface: "#FFFFFF",
+};
 
-50%{
-transform:translateY(-6px);
-}
-
-100%{
-transform:translateY(0px);
-}
-`;
+const shadow = {
+  sm: "0 1px 2px rgba(15,23,42,.08)",
+  md: "0 4px 12px rgba(15,23,42,.10)",
+  lg: "0 12px 28px rgba(15,23,42,.14)",
+};
 
 /* ==============================
    Map Container
@@ -46,10 +50,11 @@ transform:translateY(0px);
 const MapContainer = styled("div")({
   width: "100%",
   height: "100%",
-  borderRadius: 28,
+  borderRadius: 16,
   overflow: "hidden",
   position: "relative",
-  boxShadow: "0 20px 40px rgba(0,0,0,.35)",
+  border: `1px solid ${colors.border}`,
+  boxShadow: shadow.md,
 });
 
 /* ==============================
@@ -62,20 +67,26 @@ const MarkerContainer = styled("div")({
 });
 
 const Pin = styled(Box)({
-  width: 48,
-  height: 48,
+  width: 32,
+  height: 32,
   borderRadius: "50%",
-  background: "linear-gradient(135deg,#00c6ff,#0072ff)",
+  background: colors.primary,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   color: "#fff",
-  boxShadow: "0 10px 25px rgba(0,114,255,.45)",
-  animation: `${float} 2.8s ease infinite`,
-  transition: ".25s",
+  border: "2px solid #fff",
+  boxShadow: shadow.md,
+  transition: "transform .15s ease, box-shadow .15s ease",
 
   "&:hover": {
-    transform: "scale(1.15)",
+    transform: "scale(1.12)",
+    boxShadow: shadow.lg,
+    background: colors.primaryDark,
+  },
+
+  "& svg": {
+    fontSize: 18,
   },
 });
 
@@ -84,50 +95,75 @@ const Pin = styled(Box)({
 ============================== */
 
 const MarkerCard = styled(Paper)({
-  width: 190,
+  width: 200,
   overflow: "hidden",
-  borderRadius: 18,
-  background: "rgba(15,23,42,.96)",
-  backdropFilter: "blur(15px)",
-  color: "#fff",
-  boxShadow: "0 15px 35px rgba(0,0,0,.4)",
+  borderRadius: 12,
+  background: colors.surface,
+  border: `1px solid ${colors.border}`,
+  boxShadow: shadow.lg,
+  marginBottom: 8,
 });
 
 const MarkerImage = styled("img")({
   width: "100%",
-  height: 105,
+  height: 96,
   objectFit: "cover",
+  display: "block",
 });
 
 const MarkerContent = styled(Box)({
-  padding: 12,
+  padding: "10px 12px 12px",
 });
 
 const PlaceName = styled(Typography)({
-  fontWeight: 700,
-  fontSize: ".95rem",
+  fontWeight: 600,
+  fontSize: ".9rem",
+  color: colors.text,
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
+  marginBottom: 4,
 });
 
 const RatingChip = styled(Chip)({
-  background: "#0072ff",
-  color: "#fff",
+  height: 22,
+  fontSize: ".72rem",
+  fontWeight: 600,
+  color: colors.primaryDark,
+  background: "#EFF6FF",
+  border: "1px solid #DBEAFE",
+
+  "& .MuiChip-icon": {
+    color: colors.primaryDark,
+    marginLeft: 4,
+  },
 });
 
 /* ==============================
-   Floating Buttons
+   Floating Controls
 ============================== */
 
 const FloatingControls = styled(Box)({
   position: "absolute",
-  right: 20,
-  top: 20,
+  right: 16,
+  top: 16,
   zIndex: 5,
-  display: "flex",
-  flexDirection: "column",
-  gap: 10,
+});
+
+const LocationButton = styled(IconButton)({
+  width: 40,
+  height: 40,
+  background: colors.surface,
+  color: colors.textMuted,
+  border: `1px solid ${colors.border}`,
+  boxShadow: shadow.sm,
+  transition: ".15s ease",
+
+  "&:hover": {
+    background: colors.surface,
+    color: colors.primary,
+    boxShadow: shadow.md,
+  },
 });
 
 /* ==============================
@@ -159,18 +195,9 @@ const Map = ({
   return (
     <MapContainer>
       <FloatingControls>
-        <IconButton
-          onClick={handleMyLocation}
-          sx={{
-            bgcolor: "rgba(15,23,42,.9)",
-            color: "#fff",
-            "&:hover": {
-              bgcolor: "#0072ff",
-            },
-          }}
-        >
-          <MyLocation />
-        </IconButton>
+        <LocationButton onClick={handleMyLocation} size="small">
+          <MyLocation fontSize="small" />
+        </LocationButton>
       </FloatingControls>
 
       <GoogleMapReact
@@ -179,14 +206,20 @@ const Map = ({
         }}
         center={coordinates}
         defaultZoom={14}
-        options={{
+        options={(maps) => ({
           disableDefaultUI: true,
           zoomControl: true,
           fullscreenControl: true,
-          mapTypeControl: true,
           streetViewControl: false,
+          mapTypeId: "roadmap",
+          mapTypeControl: true,
+          mapTypeControlOptions: {
+            style: maps.MapTypeControlStyle.DROPDOWN_MENU,
+            position: maps.ControlPosition.TOP_LEFT,
+            mapTypeIds: ["roadmap", "terrain", "satellite", "hybrid"],
+          },
           styles: mapStyles,
-        }}
+        })}
         onChange={({ center, marginBounds }) => {
           setCoordinates(center);
 
@@ -194,7 +227,8 @@ const Map = ({
             ne: marginBounds.ne,
             sw: marginBounds.sw,
           });
-        }}       >
+        }}
+      >
         {/* ======================
             MAP MARKERS
         ======================= */}
@@ -209,11 +243,11 @@ const Map = ({
               lng={Number(place.longitude)}
               onClick={() => {
                 setSelectedPlace(place);
-                setChildClicked(i); // Only update when marker is clicked
+                setChildClicked(i);
               }}
             >
               <Pin>
-                <LocationOnOutlined />
+                <LocationOn />
               </Pin>
             </MarkerContainer>
           );
@@ -228,7 +262,7 @@ const Map = ({
             lat={Number(selectedPlace.latitude)}
             lng={Number(selectedPlace.longitude)}
           >
-            <MarkerCard elevation={10}>
+            <MarkerCard elevation={0}>
               <MarkerImage
                 src={
                   selectedPlace.photo?.images?.large?.url ||
@@ -238,9 +272,7 @@ const Map = ({
               />
 
               <MarkerContent>
-                <PlaceName gutterBottom>
-                  {selectedPlace.name}
-                </PlaceName>
+                <PlaceName>{selectedPlace.name}</PlaceName>
 
                 <Box
                   display="flex"
@@ -257,7 +289,7 @@ const Map = ({
 
                   <RatingChip
                     size="small"
-                    icon={<Star sx={{ color: "#fff !important" }} />}
+                    icon={<Star sx={{ fontSize: 14 }} />}
                     label={selectedPlace.rating || "N/A"}
                   />
                 </Box>
@@ -265,8 +297,9 @@ const Map = ({
                 <Typography
                   variant="body2"
                   sx={{
-                    color: "#cbd5e1",
-                    fontSize: ".78rem",
+                    color: colors.textMuted,
+                    fontSize: ".76rem",
+                    lineHeight: 1.4,
                   }}
                 >
                   {selectedPlace.address ||
@@ -280,10 +313,11 @@ const Map = ({
                     sx={{
                       display: "block",
                       mt: 1,
-                      color: "#94a3b8",
+                      color: colors.textMuted,
+                      fontSize: ".7rem",
                     }}
                   >
-                    {selectedPlace.num_reviews} Reviews
+                    {selectedPlace.num_reviews} reviews
                   </Typography>
                 )}
               </MarkerContent>

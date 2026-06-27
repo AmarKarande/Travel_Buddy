@@ -4,32 +4,29 @@
   position: relative;
 
   width: 100%;
-  height: 520px;
+  height: 100%;        /* ✅ Fill the 650px Box from App.js */
+  min-height: 520px;   /* ✅ Safety floor */
 
   border-radius: 32px;
-  overflow: hidden;
+  overflow: visible;   /* ✅ Was "hidden" — was cutting off stat cards */
 
-  padding: 24px;
+  padding: 28px 24px;
 
   color: white;
   font-family: "Poppins", sans-serif;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(15, 23, 42, 0.96),
-      rgba(30, 41, 59, 0.94)
-    );
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.96),
+    rgba(30, 41, 59, 0.94)
+  );
 
-  border: 1px solid
-    rgba(255, 255, 255, 0.08);
-
+  border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(18px);
 
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0
-      rgba(255, 255, 255, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 
   display: flex;
   flex-direction: column;
@@ -44,82 +41,58 @@
 
 .weather-overlay {
   position: absolute;
-
   width: 240px;
   height: 240px;
-
-  background:
-    rgba(0, 198, 255, 0.12);
-
+  background: rgba(0, 198, 255, 0.12);
   border-radius: 50%;
-
   filter: blur(120px);
-
   top: -100px;
   right: -80px;
-
   z-index: 0;
+  pointer-events: none;
 }
 
 .weather-top {
   position: relative;
   z-index: 2;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .weather-type {
   padding: 8px 16px;
-
   border-radius: 30px;
-
-  background:
-    rgba(255, 255, 255, 0.08);
-
-  border: 1px solid
-    rgba(255, 255, 255, 0.08);
-
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 0.85rem;
   font-weight: 600;
-
   color: #00c6ff;
-
   backdrop-filter: blur(12px);
 }
 
 .weather-icon {
   width: 85px;
   height: 85px;
-
   object-fit: contain;
-
-  filter: drop-shadow(
-    0 10px 20px
-      rgba(0, 0, 0, 0.3)
-  );
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
 }
 
 .temperature-section {
   position: relative;
   z-index: 2;
-
-  margin-top: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .temp {
-  font-size: 4rem;
+  font-size: 4.2rem;
   font-weight: 800;
   line-height: 1;
-
-  background:
-    linear-gradient(
-      to right,
-      #ffffff,
-      #00c6ff
-    );
-
+  background: linear-gradient(to right, #ffffff, #00c6ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -128,12 +101,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-
   margin-top: 10px;
-
-  color:
-    rgba(255, 255, 255, 0.75);
-
+  color: rgba(255, 255, 255, 0.75);
   font-size: 0.95rem;
   font-weight: 500;
 }
@@ -141,65 +110,53 @@
 .weather-stats {
   position: relative;
   z-index: 2;
-
   display: flex;
   flex-direction: column;
-
-  gap: 12px;
-
-  margin-top: 16px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .stat-card {
   display: flex;
   align-items: center;
-
   gap: 14px;
-
-  padding: 14px;
-
+  padding: 13px 16px;
   border-radius: 18px;
-
-  background:
-    rgba(255, 255, 255, 0.05);
-
-  border: 1px solid
-    rgba(255, 255, 255, 0.08);
-
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
-
   transition: 0.3s ease;
 }
 
 .stat-card:hover {
-  background:
-    rgba(255, 255, 255, 0.08);
-
+  background: rgba(255, 255, 255, 0.09);
   transform: translateX(3px);
 }
 
 .stat-icon {
   font-size: 1.6rem !important;
   color: #00c6ff;
+  flex-shrink: 0;
 }
 
 .stat-card h3 {
   font-size: 1rem;
   font-weight: 700;
+  margin: 0;
 }
 
 .stat-card p {
   font-size: 0.8rem;
-
-  color:
-    rgba(255, 255, 255, 0.65);
-
-  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 2px 0 0;
 }
 
-/* =========================
-   TABLET
-========================= */
+@media (max-width: 1200px) {
+  .weather-card {
+    height: auto;
+    min-height: 560px;
+  }
+}
 
 @media (max-width: 900px) {
   .weather-card {
@@ -208,20 +165,11 @@
   }
 }
 
-/* =========================
-   MOBILE
-========================= */
-
 @media (max-width: 480px) {
   .weather-card {
     border-radius: 24px;
     padding: 20px;
     min-height: auto;
-  }
-
-  .weather-top {
-    flex-direction: row;
-    align-items: center;
   }
 
   .temp {
@@ -234,10 +182,10 @@
   }
 
   .weather-stats {
-    gap: 10px;
+    gap: 8px;
   }
 
   .stat-card {
-    padding: 12px;
+    padding: 11px 14px;
   }
 }

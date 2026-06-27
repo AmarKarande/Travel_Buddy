@@ -7,6 +7,9 @@ body,
   min-height: 100%;
   overflow-x: hidden;
   background: #0f172a;
+
+  /* ✅ Prevents browser from restoring scroll mid-page on refresh */
+  scroll-behavior: auto;
 }
 
 * {

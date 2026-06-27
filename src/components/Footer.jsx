@@ -144,13 +144,12 @@ const Footer = () => {
       <FooterContent maxWidth="lg">
         {/* Brand */}
         <BrandTitle variant="h4">
-          Travel Genius
+          TravelBuddy
         </BrandTitle>
 
         <BrandSubtitle variant="body1">
-          Explore the world smarter with AI-powered
-          travel planning, personalized recommendations,
-          and unforgettable experiences.
+          Your intelligent travel companion for discovering exceptional destinations,
+           premium stays, local dining, and unforgettable experiences.
         </BrandSubtitle>
 
         {/* Social Icons */}
