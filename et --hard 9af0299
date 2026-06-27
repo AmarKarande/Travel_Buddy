@@ -1,0 +1,29 @@
+[33m9af0299[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Removed exposed API key and fixed env usage
+[33m0e26f14[m Replace makeStyles with MUI v5 styled API
+[33mcfdf4f6[m Fix AI section design issue
+[33m8d6ec09[m Upgraded to Material UI 5 with modern design improvements, enhanced styling, and better responsiveness.
+[33m81d34a0[m Merge branch 'main' of https://github.com/BhaskarAcharjee/TravelGenius
+[33m016963e[m Weather card media responsiveness improve
+[33m939bdfc[m Update README.md
+[33me9e9f93[m fixed eslint import export issue
+[33m67fdc3f[m Merge apiService conflict
+[33m20a6f43[m Significant changes in AI model and UI responsiveness
+[33md04689c[m api secret key hide
+[33m33b8b8c[m Recommendation section media responsive UI fix
+[33ma15ed45[m Improved AskAI component layout
+[33mfb45e60[m Weather API changed, list and card layout design update & AskAI section aded
+[33m3cb7d75[m Vercel web analytics integrated
+[33m4d38cee[m Update README.md
+[33md7244d6[m Weather API data fetched & landing page ui improved
+[33m4e610fe[m Improved layout and Weather card added
+[33m45fc736[m Landing page added & scroll to reveal header
+[33mbb972cc[m modify design & layout
+[33m6b1f950[m update modern UI look
+[33m813e66f[m modify latest dependencies
+[33me480ea1[m useStyle hooks update
+[33ma8c556f[m Fixed fetching API data
+[33m0bba6fc[m Create LICENSE
+[33mc73f848[m Create README.md
+[33ma3481d3[m integrate React useStyles hook for styling
+[33m9cff654[m fixed rendering blank api data
+[33m8045617[m Initialize
