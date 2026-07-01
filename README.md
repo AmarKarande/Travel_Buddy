@@ -142,7 +142,7 @@ Built with Material UI to deliver a seamless experience across desktops, tablets
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/TravelBuddy.git
+git clone https://github.com/AmarKarande/Travel_Buddy.git
 ```
 
 Move into the project directory.
@@ -232,7 +232,7 @@ This project is licensed under the **MIT License**.
 
 **AK**
 
-GitHub: https://github.com/your-username
+GitHub: https://github.com/AmarKarande/Travel_Buddy.git
 
 LinkedIn: https://linkedin.com/in/your-profile
 
