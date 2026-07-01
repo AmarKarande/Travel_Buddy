@@ -1,6 +1,6 @@
 {
-  "homepage": "",
-  "name": "travel-genius",
+  "homepage": ".",
+  "name": "travelbuddy",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
