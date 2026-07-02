@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SONAR_HOME = tool "sonar-scanner"
-        DOCKER_IMAGE = "yourdockerhubusername/travel-buddy"
+        DOCKER_IMAGE = "amarskarande/travel-buddy"
     }
 
     stages {
