@@ -15,7 +15,9 @@ pipeline {
 
         stage('OWASP Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./ --format XML --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_KEY')]) {
+                    dependencyCheck additionalArguments: "--scan ./ --format XML --disableYarnAudit --disableNodeAudit --nvdApiKey ${NVD_KEY}", odcInstallation: 'DP-Check'
+                }
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
