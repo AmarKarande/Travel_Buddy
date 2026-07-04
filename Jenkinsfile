@@ -75,13 +75,13 @@ pipeline {
             }
         }
 
-        // stage('Trigger CD Job') {
-        //     steps {
-        //         build job: 'travel-buddy-CD', parameters: [
-        //             string(name: 'IMAGE_TAG', value: "${BUILD_NUMBER}")
-        //         ], wait: false
-        //     }
-        // }
+        stage('Trigger CD Job') {
+            steps {
+                build job: 'travel-buddy-CD', parameters: [
+                    string(name: 'IMAGE_TAG', value: "${BUILD_NUMBER}")
+                ], wait: false
+            }
+        }
     }
 
     post {
