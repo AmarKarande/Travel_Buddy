@@ -89,7 +89,7 @@ pipeline {
             archiveArtifacts artifacts: 'trivy-fs-report.txt', allowEmptyArchive: true
         }
         failure {
-            echo 'CI Pipeline failed — check the failing stage above.'
+            echo 'CI Pipeline failed — check the failing stage  above.'
         }
     }
 }
