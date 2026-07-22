@@ -15,7 +15,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar-server') {
+                withSonarQubeEnv('SonarQube') {
                     sh """
                         $SONAR_HOME/bin/sonar-scanner \
                           -Dsonar.projectName=travel-buddy \
