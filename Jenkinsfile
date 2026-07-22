@@ -13,6 +13,20 @@ pipeline {
             }
         }
 
+        stage('OWASP Dependency Check') {
+            steps {
+                withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')]) {
+                    dependencyCheck additionalArguments: """
+                        --scan .
+                        --format ALL
+                        --nvdApiKey ${NVD_API_KEY}
+                        --disableYarnAudit
+                    """, odcInstallation: 'DP-Check'
+                }
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -75,18 +89,18 @@ pipeline {
             }
         }
 
-        stage('Trigger CD Job') {
-            steps {
-                build job: 'travel-buddy-CD', parameters: [
-                    string(name: 'IMAGE_TAG', value: "${BUILD_NUMBER}")
-                ], wait: false
-            }
-        }
+        // stage('Trigger CD Job') {
+        //     steps {
+        //         build job: 'travel-buddy-CD', parameters: [
+        //             string(name: 'IMAGE_TAG', value: "${BUILD_NUMBER}")
+        //         ], wait: false
+        //     }
+        // }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'trivy-fs-report.txt', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'trivy-fs-report.txt, dependency-check-report.*', allowEmptyArchive: true
         }
         failure {
             echo 'CI Pipeline failed — check the failing stage  above.'
