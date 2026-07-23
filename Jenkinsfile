@@ -3,12 +3,13 @@ pipeline {
 
     environment {
         SONAR_HOME = tool 'sonar-scanner'
-        DOCKER_IMAGE = 'amarskarande/travel-buddy'
+        DOCKER_IMAGE = "amarskarande/travel-buddy"
     }
 
     options {
         timestamps()
         disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
     stages {
@@ -24,7 +25,6 @@ pipeline {
                 withCredentials([
                     string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')
                 ]) {
-
                     dependencyCheck(
                         odcInstallation: 'DP-Check',
                         additionalArguments: """
@@ -44,9 +44,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-
                 withSonarQubeEnv('SonarQube') {
-
                     sh """
                     ${SONAR_HOME}/bin/sonar-scanner \
                     -Dsonar.projectKey=travel-buddy \
@@ -54,31 +52,26 @@ pipeline {
                     -Dsonar.sources=src
                     """
                 }
-
             }
         }
 
         stage('Quality Gate') {
             steps {
-
                 timeout(time: 10, unit: 'MINUTES') {
-
                     waitForQualityGate abortPipeline: true
-
                 }
             }
         }
 
         stage('Trivy Filesystem Scan') {
             steps {
-
                 sh '''
                 trivy fs \
+                --severity HIGH,CRITICAL \
                 --format table \
                 --output trivy-fs-report.txt \
                 .
                 '''
-
             }
         }
 
@@ -102,29 +95,25 @@ pipeline {
                     --build-arg REACT_APP_GEMINI_API_KEY=${GEMINI_KEY} \
                     -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .
                     """
-
                 }
-
             }
         }
 
         stage('Trivy Image Scan') {
             steps {
-
                 sh """
                 trivy image \
                 --severity HIGH,CRITICAL \
                 --format table \
                 --exit-code 0 \
+                --output trivy-image-report.txt \
                 ${DOCKER_IMAGE}:${BUILD_NUMBER}
                 """
-
             }
         }
 
         stage('Docker Login & Push') {
             steps {
-
                 withCredentials([
                     usernamePassword(
                         credentialsId: 'dockerhub-creds',
@@ -146,24 +135,20 @@ pipeline {
 
                     docker logout
                     """
-
                 }
-
             }
         }
 
         stage('Trigger CD Pipeline') {
             steps {
-
                 build job: 'travel-buddy-CD',
-                wait: false,
-                parameters: [
-                    string(
-                        name: 'IMAGE_TAG',
-                        value: "${BUILD_NUMBER}"
-                    )
-                ]
-
+                    wait: false,
+                    parameters: [
+                        string(
+                            name: 'IMAGE_TAG',
+                            value: "${BUILD_NUMBER}"
+                        )
+                    ]
             }
         }
 
@@ -172,26 +157,29 @@ pipeline {
     post {
 
         success {
+            echo "=========================================="
             echo "CI Pipeline Completed Successfully"
+            echo "Docker Image: ${DOCKER_IMAGE}:${BUILD_NUMBER}"
+            echo "=========================================="
         }
 
         failure {
+            echo "=========================================="
             echo "CI Pipeline Failed"
+            echo "=========================================="
         }
 
         always {
 
             archiveArtifacts artifacts: '''
                 trivy-fs-report.txt,
+                trivy-image-report.txt,
                 dependency-check-report.xml,
                 dependency-check-report.html,
                 dependency-check-report.json
             ''', allowEmptyArchive: true
 
             cleanWs()
-
         }
-
     }
-
 }
