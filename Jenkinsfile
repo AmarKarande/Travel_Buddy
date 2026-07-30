@@ -139,18 +139,18 @@ pipeline {
             }
         }
 
-        // stage('Trigger CD Pipeline') {
-        //     steps {
-        //         build job: 'travel-buddy-CD',
-        //             wait: false,
-        //             parameters: [
-        //                 string(
-        //                     name: 'IMAGE_TAG',
-        //                     value: "${BUILD_NUMBER}"
-        //                 )
-        //             ]
-        //     }
-        // }
+        stage('Trigger CD Pipeline') {
+            steps {
+                build job: 'travel-buddy-CD',
+                    wait: false,
+                    parameters: [
+                        string(
+                            name: 'IMAGE_TAG',
+                            value: "${BUILD_NUMBER}"
+                        )
+                    ]
+            }
+        }
 
     }
 
