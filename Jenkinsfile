@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS-20'
+    }
+
     environment {
         SONAR_HOME = tool 'sonar-scanner'
         DOCKER_IMAGE = "amarskarande/travel-buddy"
@@ -22,6 +26,8 @@ pipeline {
 
         stage('OWASP Dependency Check') {
             steps {
+                sh 'npm install'
+
                 withCredentials([
                     string(credentialsId: 'nvd-api-key', variable: 'NVD_API_KEY')
                 ]) {
