@@ -162,30 +162,72 @@ pipeline {
 
     post {
 
-        success {
-            echo "=========================================="
-            echo "CI Pipeline Completed Successfully"
-            echo "Docker Image: ${DOCKER_IMAGE}:${BUILD_NUMBER}"
-            echo "=========================================="
-        }
+    success {
+        echo "=========================================="
+        echo "CI Pipeline Completed Successfully"
+        echo "Docker Image: ${DOCKER_IMAGE}:${BUILD_NUMBER}"
+        echo "=========================================="
 
-        failure {
-            echo "=========================================="
-            echo "CI Pipeline Failed"
-            echo "============================================"
-        }
+        emailext(
+            to: 'amar.skarande@gmail.com',
+            subject: "✅ CI SUCCESS - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            mimeType: 'text/html',
+            body: """
+            <h2 style="color:green;">CI Pipeline Completed Successfully</h2>
 
-        always {
+            <b>Project:</b> Travel Buddy <br>
+            <b>Job:</b> ${env.JOB_NAME} <br>
+            <b>Build Number:</b> ${env.BUILD_NUMBER} <br>
+            <b>Docker Image:</b> ${DOCKER_IMAGE}:${BUILD_NUMBER} <br>
 
-            archiveArtifacts artifacts: '''
-                trivy-fs-report.html,
-                trivy-image-report.html,
-                dependency-check-report.xml,
-                dependency-check-report.html,
-                dependency-check-report.json
-            ''', allowEmptyArchive: true
+            <br>
 
-            cleanWs()
-        }
+            <b>Build URL:</b><br>
+            <a href="${env.BUILD_URL}">
+            ${env.BUILD_URL}
+            </a>
+            """
+        )
     }
+
+    failure {
+        echo "=========================================="
+        echo "CI Pipeline Failed"
+        echo "=========================================="
+
+        emailext(
+            to: 'amar.skarande@gmail.com',
+            subject: "🚨 CI FAILED - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            mimeType: 'text/html',
+            body: """
+            <h2 style="color:red;">CI Pipeline Failed</h2>
+
+            <b>Project:</b> Travel Buddy <br>
+            <b>Job:</b> ${env.JOB_NAME} <br>
+            <b>Build Number:</b> ${env.BUILD_NUMBER} <br>
+
+            <br>
+
+            <b>Please check the Jenkins Console Log:</b><br>
+
+            <a href="${env.BUILD_URL}console">
+            ${env.BUILD_URL}console
+            </a>
+            """
+        )
+    }
+
+    always {
+
+        archiveArtifacts artifacts: '''
+            trivy-fs-report.html,
+            trivy-image-report.html,
+            dependency-check-report.xml,
+            dependency-check-report.html,
+            dependency-check-report.json
+        ''', allowEmptyArchive: true
+
+        cleanWs()
+    }   
+}
 }
