@@ -68,8 +68,9 @@ pipeline {
                 sh '''
                 trivy fs \
                 --severity HIGH,CRITICAL \
-                --format table \
-                --output trivy-fs-report.txt \
+                --format template \
+                --template "@/usr/local/share/trivy/templates/html.tpl" \
+                --output trivy-fs-report.html \
                 .
                 '''
             }
@@ -104,9 +105,10 @@ pipeline {
                 sh """
                 trivy image \
                 --severity HIGH,CRITICAL \
-                --format table \
+                --format template \
+                --template "@/usr/local/share/trivy/templates/html.tpl" \
                 --exit-code 0 \
-                --output trivy-image-report.txt \
+                --output trivy-image-report.html \
                 ${DOCKER_IMAGE}:${BUILD_NUMBER}
                 """
             }
@@ -172,8 +174,8 @@ pipeline {
         always {
 
             archiveArtifacts artifacts: '''
-                trivy-fs-report.txt,
-                trivy-image-report.txt,
+                trivy-fs-report.html,
+                trivy-image-report.html,
                 dependency-check-report.xml,
                 dependency-check-report.html,
                 dependency-check-report.json
