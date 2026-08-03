@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        githubPush()
+    }
+
     environment {
         SONAR_HOME = tool 'sonar-scanner'
         DOCKER_IMAGE = "amarskarande/travel-buddy"
