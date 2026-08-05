@@ -192,7 +192,7 @@ pipeline {
 
     failure {
         echo "=========================================="
-        echo "CI Pipeline Failed"
+        echo "CI Pipeline Failed "
         echo "=========================================="
 
         emailext(
